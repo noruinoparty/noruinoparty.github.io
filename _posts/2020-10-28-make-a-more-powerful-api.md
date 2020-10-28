@@ -22,7 +22,9 @@ title: 让我的接口更高能
 > 记下每次请求的响应时间，把记录存入（选的mongo），汇总展示
 
 ### s1 - 记录接口响应时间
+
 > 存储的结构
+
 ```go
 type Elapse struct {
 	ID        bson.ObjectId `bson:"_id,omitempty" json:"id"` 
@@ -35,7 +37,9 @@ type Elapse struct {
 	Ctime     time.Time     `bson:"ctime" json:"ctime"`
 }
 ```
+
 > 中间件
+
 ```go
 package pin
 
@@ -61,14 +65,18 @@ func recordTimeCost(start time.Time, context *gin.Context) {
 	return
 }
 ```
+
 > 在router中进行调用
+
 ```go
 package router
 
 	r := gin.Default()
 	r.Use(pin.Pin())
 ```
+
 ### s2 - 存储记录的值
+
 ```mongojs
 {
         "_id" : ObjectId("5f97d25c133fe8f76cfbf6e1"),
@@ -77,7 +85,7 @@ package router
         "time_cost" : NumberLong(2),
         "ctime" : ISODate("2020-10-27T07:55:08.831Z")
 }
-
 ```
+
 ### s3 - 把数据汇总展示
 <img src="/images/posts/2020-10-28/stats.jpg"  alt="example"/>
