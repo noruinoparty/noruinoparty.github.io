@@ -63,6 +63,8 @@ func recordTimeCost(start time.Time, context *gin.Context) {
 ```
 > 在router中进行调用
 ```go
+package router
+
 	r := gin.Default()
 	r.Use(pin.Pin())
 ```
